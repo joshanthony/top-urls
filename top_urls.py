@@ -14,22 +14,26 @@ def get_top_urls(n = 10):
 
     top_n_urls = PriorityQueue()
     
-    # Open and read the file    
-    with open(file_path, 'r') as f:
-        for line in f:
-            try:
-                url, value = line.rsplit(maxsplit=1)
-                value = int(value)
-                # If the queue has space, add the url
-                if top_n_urls.qsize() < n:
-                    top_n_urls.put((value, url))
-                else:
-                    # If value is larger than the smallest item, replace it with value
-                    if top_n_urls.queue[0][0] < value:
-                        top_n_urls.get()
+    try:
+        # Open and read the file    
+        with open(file_path, 'r') as f:
+            for line in f:
+                try:
+                    url, value = line.rsplit(maxsplit=1)
+                    value = int(value)
+                    # If the queue has space, add the url
+                    if top_n_urls.qsize() < n:
                         top_n_urls.put((value, url))
-            except ValueError:
-                continue
+                    else:
+                        # If value is larger than the smallest item, replace it with value
+                        if top_n_urls.queue[0][0] < value:
+                            top_n_urls.get()
+                            top_n_urls.put((value, url))
+                except ValueError:
+                    continue
+    except:
+        print(f"Error cannot open {file_path}")
+        return
     
     # Reverse and print the result PriorityQueue supports minheap only
     result = []
