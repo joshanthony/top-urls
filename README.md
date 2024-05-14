@@ -1,7 +1,7 @@
 How to run:
 - Install Python 3 on your local machine
 - cd into the directory and run `python3 top_urls.py file.txt`
-- Provide any file instead of file.txt
+- file.txt can be any file in the required format, example file.text provided
 
 Assumptions
 - We only need to store the top 10 results
